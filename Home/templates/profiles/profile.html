@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <h1>Update your profile</h1>
+    <hr>
+    {% if messages %}                           
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="alert alert-success alert-dismissible date show" role="alert">
+                    {{ message }}  
+                    <button type="submit" class="close" data-dismiss="alert" aria-label="Close">
+                        <span sria-hidden="true"><i class="fa-thin fa-comment-xmark"></i></span>
+                    </button> 
+                </div>
+            {% endif %}
+        {% endfor %}                           
+    {% endif %}
+    <form action="{% url 'profile_update' %}" method="post">
+        {% csrf_token %}
+        <div class="col-lg-6">
+            <div class="basic-login mb-50">
+                <label for="name">Firstname<span>*</span></label>
+                <input id="name" type="text" aria-placeholder="Enter firstname" name="first_name" value="{{user.first_name}}">
+
+                <label for="username">Lastname<span>*</span></label>
+                <input id="username" type="text" aria-placeholder="Enter lasttname" name="last_name" value="{{user.last_name}}">
+
+                <label for="pass">Username<span>*</span></label>
+                <input id="pass" type="text" aria-placeholder="Enter Username ..." name="username" value="{{user.username}}">               
+
+                
+                <label for="pass">Email Address<span>*</span></label>
+                <input id="email-id" type="email" aria-placeholder="Enter email ..." name="email" value="{{user.email}}">
+
+                <label for="username">Password<span>*</span></label>
+                <input id="pass" type="password" aria-placeholder="Fill Only you want to change password" name="password" value="{{user.password}}">
+            <div class="row">
+                <div class="col-6">
+                    <button type="submit" class="tp-in-btn w-100">Update Profile</button>
+                </div>
+                <div class="col-6">
+                    <a href="{% url 'logout' %}" class="btn btn-danger w-100 rounded">Logout</a>
+                </div>
+            </div>
+            
+        </div>
+        </div>
+
+    </form>
+
+{% endblock content %}
